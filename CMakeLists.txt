@@ -50,7 +50,9 @@ foreach(targetname ${ALL_MODULES})
             set(TARGET_SOURCE_DIR ${dir})
         endif()
     endforeach()
-    add_module_doc_target(${targetname} ${TARGET_SOURCE_DIR})
+    get_filename_component(PARENT_DIR ${TARGET_SOURCE_DIR} DIRECTORY)
+    get_filename_component(CATEGORY ${PARENT_DIR} NAME) 
+    add_module_doc_target(${targetname} ${TARGET_SOURCE_DIR} ${CATEGORY})
 endforeach()
 
 

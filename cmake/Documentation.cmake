@@ -1,10 +1,10 @@
-macro(add_module_doc_target targetname target_source_dir)
+macro(add_module_doc_target targetname target_source_dir category)
 
     set(VISTLE_DOCUMENTATION_WORKFLOW ${PROJECT_SOURCE_DIR}/tools/generateModuleInfo.vsl)
     set(DOC_COMMAND ${CMAKE_COMMAND} -E env VISTLE_DOCUMENTATION_TARGET=${targetname} VISTLE_DOCUMENTATION_DIR=${CMAKE_CURRENT_SOURCE_DIR}
-                    VISTLE_DOCUMENTATION_BIN_DIR=${CMAKE_CURRENT_BINARY_DIR} vistle --batch ${VISTLE_DOCUMENTATION_WORKFLOW})
+                    VISTLE_DOCUMENTATION_BIN_DIR=${CMAKE_CURRENT_BINARY_DIR} VISTLE_DOCUMENTATION_CATEGORY=${category} vistle --batch ${VISTLE_DOCUMENTATION_WORKFLOW})
 
-    set(OUTPUT_FILE ${PROJECT_SOURCE_DIR}/docs/source/modules/${targetname}.md)
+    set(OUTPUT_FILE ${PROJECT_SOURCE_DIR}/docs/source/modules/${category}/${targetname}.md)
     set(INPUT_FILE ${target_source_dir}/${targetname}.md)
     if(NOT EXISTS ${INPUT_FILE})
         set(INPUT_FILE)
@@ -20,13 +20,9 @@ macro(add_module_doc_target targetname target_source_dir)
                 ${PROJECT_SOURCE_DIR}/tools/GenModInfo/genModInfo.py #dependency of VISTLE_DOCUMENTATION_WORKFLOW
                 ${DOCUMENTATION_DEPENDENCIES} #custom dependencies set by the calling module
         COMMENT "Generating documentation for " ${targetname})
+
     add_custom_target(${targetname}_doc DEPENDS ${OUTPUT_FILE})
-    if(VISTLE_DOC_SKIP)
-        message("Skipping ${targetname}_doc: ${VISTLE_DOC_SKIP}")
-        add_dependencies(vistle_doc_skip ${targetname}_doc)
-    else()
-        add_dependencies(vistle_doc ${targetname}_doc)
-    endif()
+    add_dependencies(vistle_doc ${targetname}_doc)
 
     file(
         GLOB WORKFLOWS
@@ -35,7 +31,6 @@ macro(add_module_doc_target targetname target_source_dir)
 
     foreach(file ${WORKFLOWS})
         get_filename_component(workflow ${file} NAME_WLE)
-        message("Workflow: ${targetname} ${workflow} ${file}")
         # generate_network_snapshot(${targetname} ${workflow})
         generate_snapshots(${targetname} ${workflow})
     endforeach()

@@ -9,8 +9,9 @@ import vistle
 BUILDDIR = os.environ['VISTLE_DOCUMENTATION_BIN_DIR']
 SOURCEDIR = os.environ['VISTLE_DOCUMENTATION_DIR']
 TARGET = os.environ['VISTLE_DOCUMENTATION_TARGET']
+CATEGORY = os.environ['VISTLE_DOCUMENTATION_CATEGORY']
 DESTDIR = os.path.dirname(os.path.realpath(
-    __file__)) + "/../../source/modules/"
+    __file__)) + "/../../docs/source/modules/"+CATEGORY+"/"
 
 REG_IMAGE = re.compile(r"(?:\w+(?:-\w+)+|\w*)\.(?:jpg|gif|png|bmp)")
 REG_TAGS_TMPL = r"\[{tag}\]:<(\w*)>"
@@ -297,6 +298,7 @@ def generateModuleDescriptions() -> None:
         output.append(line)
 
     # add the missing essential sections
+    print("Writing to " + DESTDIR + TARGET + ".md")
     with open(DESTDIR + TARGET + ".md", "w") as f:
         unused_essential_tags = essential_tags.keys() - used_tags
         if HEADLINE_TAG in unused_essential_tags:
