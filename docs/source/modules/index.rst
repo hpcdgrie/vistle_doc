@@ -4,6 +4,7 @@ Modules
 .. toctree::
    :maxdepth: 1
 
+   ANARemote.md
    AddAttribute.md
    ApplyTransform.md
    Assemble.md
@@ -12,6 +13,7 @@ Modules
    AttachShader.md
    BlenderRenderer.md
    BoundingBox.md
+   COVER.md
    Cache.md
    Calc.md
    CellSelect.md
@@ -63,11 +65,14 @@ Modules
    OsgRenderer.md
    PrintAttributes.md
    PrintMetaData.md
+   ReadCfx.md
    ReadCovise.md
    ReadCoviseDirectory.md
    ReadCsv.md
    ReadDuisburg.md
    ReadDyna3D.md
+   ReadEnsight.md
+   ReadEwMatlabCsvExports.md
    ReadFoam.md
    ReadIagNetcdf.md
    ReadIagTecplot.md
@@ -77,16 +82,20 @@ Modules
    ReadMpas.md
    ReadMpasPnetcdf.md
    ReadNek5000.md
+   ReadSeisSol.md
    ReadSoundPlan.md
    ReadTsunami.md
    ReadVtk.md
+   ReadWrfChem.md
    Replicate.md
    Sample.md
    ScalarToVec.md
+   SenseiController.md
    ShowCelltree.md
    ShowGrid.md
    ShowGridIndex.md
    SortBlocks.md
+   SpheresOld.md
    SpheresOverlap.md
    SplitDimensions.md
    SplitPolyhedra.md
@@ -103,6 +112,7 @@ Modules
    Tracer.md
    Transform.md
    TransformGrid.md
+   TubesOld.md
    Validate.md
    Variant.md
    VecToScalar.md

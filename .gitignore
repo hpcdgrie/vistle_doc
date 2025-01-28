@@ -1,2 +1,4 @@
 __pycache__
 /docs/build
+build/.ninja_log
+build
